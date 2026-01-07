@@ -1,0 +1,99 @@
+<svg viewBox="0 0 400 120" xmlns="http://www.w3.org/2000/svg">
+  <!-- Enhanced gradients with blue theme -->
+  <defs>
+    <linearGradient id="mainGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#0EA5E9;stop-opacity:1" />
+      <stop offset="50%" style="stop-color:#3B82F6;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#6366F1;stop-opacity:1" />
+    </linearGradient>
+    <linearGradient id="accentGradient" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" style="stop-color:#10B981;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#14B8A6;stop-opacity:1" />
+    </linearGradient>
+    <linearGradient id="lightGlow" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" style="stop-color:#60A5FA;stop-opacity:0.4" />
+      <stop offset="100%" style="stop-color:#3B82F6;stop-opacity:0" />
+    </linearGradient>
+    
+    <!-- Enhanced shadow -->
+    <filter id="softShadow" x="-50%" y="-50%" width="200%" height="200%">
+      <feGaussianBlur in="SourceAlpha" stdDeviation="3"/>
+      <feOffset dx="0" dy="3" result="offsetblur"/>
+      <feComponentTransfer>
+        <feFuncA type="linear" slope="0.2"/>
+      </feComponentTransfer>
+      <feMerge>
+        <feMergeNode/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+  </defs>
+  
+  <!-- Icon: Enhanced Graduation cap with smart network -->
+  <g transform="translate(20, 20)" filter="url(#softShadow)">
+    <!-- Glow effect behind cap -->
+    <ellipse cx="40" cy="38" rx="35" ry="12" fill="url(#lightGlow)"/>
+    
+    <!-- Graduation cap base with depth -->
+    <path d="M 40 25 L 10 35 L 40 45 L 70 35 Z" fill="url(#mainGradient)"/>
+    <path d="M 10 35 L 10 37 L 40 47 L 70 37 L 70 35 L 40 45 Z" fill="#1E40AF" opacity="0.3"/>
+    
+    <!-- Cap side panel -->
+    <path d="M 40 45 L 40 55 L 50 50 L 50 40 Z" fill="url(#mainGradient)" opacity="0.8"/>
+    <path d="M 50 40 L 50 50 L 52 49 L 52 39 Z" fill="#1E40AF" opacity="0.4"/>
+    
+    <!-- Enhanced smart nodes with glow -->
+    <circle cx="30" cy="18" r="3.5" fill="url(#accentGradient)" opacity="0.3" filter="blur(2px)"/>
+    <circle cx="30" cy="18" r="2.5" fill="url(#accentGradient)"/>
+    
+    <circle cx="50" cy="18" r="3.5" fill="url(#accentGradient)" opacity="0.3" filter="blur(2px)"/>
+    <circle cx="50" cy="18" r="2.5" fill="url(#accentGradient)"/>
+    
+    <circle cx="40" cy="10" r="3.5" fill="url(#accentGradient)" opacity="0.3" filter="blur(2px)"/>
+    <circle cx="40" cy="10" r="2.5" fill="url(#accentGradient)"/>
+    
+    <circle cx="23" cy="28" r="2.5" fill="#10B981"/>
+    <circle cx="57" cy="28" r="2.5" fill="#10B981"/>
+    <circle cx="40" cy="5" r="2" fill="#14B8A6" opacity="0.9"/>
+    
+    <!-- Enhanced connection lines with gradient -->
+    <line x1="30" y1="18" x2="40" y2="10" stroke="#10B981" stroke-width="2" opacity="0.7" stroke-linecap="round"/>
+    <line x1="50" y1="18" x2="40" y2="10" stroke="#10B981" stroke-width="2" opacity="0.7" stroke-linecap="round"/>
+    <line x1="30" y1="18" x2="23" y2="28" stroke="#10B981" stroke-width="2" opacity="0.7" stroke-linecap="round"/>
+    <line x1="50" y1="18" x2="57" y2="28" stroke="#10B981" stroke-width="2" opacity="0.7" stroke-linecap="round"/>
+    <line x1="40" y1="10" x2="40" y2="5" stroke="#14B8A6" stroke-width="1.5" opacity="0.6" stroke-linecap="round"/>
+    
+    <!-- Enhanced tassel with gradient -->
+    <line x1="70" y1="35" x2="76" y2="43" stroke="url(#accentGradient)" stroke-width="2.5" stroke-linecap="round"/>
+    <circle cx="76" cy="46" r="4" fill="url(#accentGradient)" opacity="0.4" filter="blur(2px)"/>
+    <circle cx="76" cy="46" r="3" fill="url(#accentGradient)"/>
+  </g>
+  
+  <!-- Text: EduMate with enhanced styling -->
+  <g transform="translate(110, 45)">
+    <text x="0" y="30" font-family="'Inter', 'Segoe UI', Arial, sans-serif" font-size="44" font-weight="800" fill="#0F172A">
+      Edu<tspan fill="url(#mainGradient)" font-weight="700">Mate</tspan>
+    </text>
+    
+    <!-- Enhanced tagline -->
+    <g transform="translate(0, 22)">
+      <rect x="0" y="18" width="3" height="12" fill="url(#accentGradient)" rx="1.5"/>
+      <text x="10" y="28" font-family="'Inter', 'Segoe UI', Arial, sans-serif" font-size="12" font-weight="600" 
+            fill="#64748B" letter-spacing="1.2">
+        SMART LEARNING
+      </text>
+    </g>
+  </g>
+  
+  <!-- Enhanced decorative particles -->
+  <g opacity="0.6">
+    <circle cx="365" cy="32" r="3" fill="#3B82F6"/>
+    <circle cx="365" cy="32" r="5" fill="#3B82F6" opacity="0.2"/>
+    
+    <circle cx="352" cy="42" r="2" fill="#10B981"/>
+    <circle cx="352" cy="42" r="4" fill="#10B981" opacity="0.2"/>
+    
+    <circle cx="375" cy="46" r="2.5" fill="#0EA5E9"/>
+    <circle cx="375" cy="46" r="4.5" fill="#0EA5E9" opacity="0.2"/>
+  </g>
+</svg>
