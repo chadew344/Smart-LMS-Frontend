@@ -1,15 +1,21 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
-import type {
-  ApiResponse,
-  AuthResponse,
-  AuthState,
-  LoginData,
-  RegisterData,
+import {
+  USER_ROLES,
+  type ApiResponse,
+  type AuthResponse,
+  type AuthState,
+  type LoginData,
+  type RegisterData,
+  type UserRole,
 } from "../../types";
 import authService from "../../services/authService";
+import { getErrorMessage } from "../../lib/error";
+getErrorMessage;
 
 const initialState: AuthState = {
   user: null,
+  activeRole:
+    (localStorage.getItem("activeRole") as UserRole) ?? USER_ROLES.STUDENT,
   accessToken: null,
   isAuthenticated: false,
   isLoading: false,
@@ -73,9 +79,10 @@ export const logout = createAsyncThunk<
   }
 });
 
-const getErrorMessage = (error: any, defaultMessage: string): string => {
-  return error.response?.data?.message || error.message || defaultMessage;
-};
+const normalizeUser = (user: any) => ({
+  ...user,
+  roles: user.roles?.map((r: string) => r.toLowerCase()),
+});
 
 export const authSlice = createSlice({
   name: "auth",
@@ -87,9 +94,28 @@ export const authSlice = createSlice({
       state.error = null;
       state.message = "";
     },
+
     setUser: (state, action) => {
       state.user = action.payload;
     },
+
+    setActiveRole: (state, action) => {
+      if (!state.user) return;
+
+      const role = action.payload;
+
+      if (state.user.roles.includes(USER_ROLES.ADMIN)) return;
+
+      if (
+        role === USER_ROLES.INSTRUCTOR &&
+        !state.user.roles.includes(USER_ROLES.INSTRUCTOR)
+      )
+        return;
+
+      state.activeRole = role;
+      localStorage.setItem("activeRole", role);
+    },
+
     setAccessToken: (state, action) => {
       state.accessToken = action.payload;
     },
@@ -102,7 +128,7 @@ export const authSlice = createSlice({
       })
       .addCase(register.fulfilled, (state, action) => {
         state.isLoading = false;
-        state.user = action.payload.user;
+        state.user = normalizeUser(action.payload.user);
         state.accessToken = action.payload.accessToken;
         state.isAuthenticated = true;
         state.message = "Registration successful";
@@ -122,7 +148,7 @@ export const authSlice = createSlice({
       })
       .addCase(login.fulfilled, (state, action) => {
         state.isLoading = false;
-        state.user = action.payload.user;
+        state.user = normalizeUser(action.payload.user);
         state.accessToken = action.payload.accessToken;
         state.isAuthenticated = true;
         state.message = "Login successful";
@@ -142,7 +168,7 @@ export const authSlice = createSlice({
       })
       .addCase(refreshAuth.fulfilled, (state, action) => {
         state.isLoading = false;
-        state.user = action.payload.user;
+        state.user = normalizeUser(action.payload.user);
         state.accessToken = action.payload.accessToken;
         state.isAuthenticated = true;
         state.isInitialized = true;
@@ -150,8 +176,7 @@ export const authSlice = createSlice({
       })
       .addCase(refreshAuth.rejected, (state, action) => {
         state.isLoading = false;
-        state.error =
-          action.payload === "REFRESH_FAILED" ? "Session refresh failed" : null;
+        state.error = action.payload === "REFRESH_FAILED" ? "" : null;
         state.user = null;
         state.accessToken = null;
         state.isAuthenticated = false;
@@ -180,6 +205,7 @@ export const authSlice = createSlice({
   },
 });
 
-export const { reset, setAccessToken, setUser } = authSlice.actions;
+export const { reset, setAccessToken, setUser, setActiveRole } =
+  authSlice.actions;
 
 export default authSlice.reducer;
