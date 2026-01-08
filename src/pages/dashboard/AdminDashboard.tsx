@@ -2,7 +2,6 @@ import {
   Users,
   BookOpen,
   DollarSign,
-  TrendingUp,
   UserPlus,
   AlertCircle,
   CheckCircle,

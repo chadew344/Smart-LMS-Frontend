@@ -25,6 +25,14 @@ const PublicLayout = () => {
             </Link>
 
             <nav className="hidden md:flex items-center gap-8">
+              {isAuthenticated && (
+                <Link
+                  to="/dashboard"
+                  className="text-sm font-medium text-muted-foreground hover:text-foreground transition-colors"
+                >
+                  Dashboard
+                </Link>
+              )}
               <Link
                 to="/courses"
                 className="text-sm font-medium text-muted-foreground hover:text-foreground transition-colors"

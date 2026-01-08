@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { Filter, Grid, List, SlidersHorizontal } from "lucide-react";
+import { Grid, List } from "lucide-react";
 import { CourseCard } from "../components/common/CourseCard";
 import { SearchInput } from "../components/common/SearchInput";
 import { Button } from "../components/ui/button";
@@ -38,9 +38,6 @@ export const BrowseCourses = () => {
   const dispatch = useAppDispatch();
 
   const courses = useAppSelector((state) => state.course);
-  // const { isLoading, isError, error } = useSelector(
-  //   (state: RootState) => state.course
-  // );
 
   useEffect(() => {
     const timeout = setTimeout(() => {
@@ -63,7 +60,6 @@ export const BrowseCourses = () => {
         location.pathname === "/courses" && "my-5"
       )}
     >
-      {/* Header */}
       <div>
         <h1 className="text-2xl lg:text-3xl font-bold text-foreground mb-2">
           Browse Courses
@@ -73,7 +69,6 @@ export const BrowseCourses = () => {
         </p>
       </div>
 
-      {/* Filters */}
       <div className="flex flex-col lg:flex-row gap-4">
         <SearchInput
           value={searchQuery}
@@ -142,7 +137,6 @@ export const BrowseCourses = () => {
         </div>
       </div>
 
-      {/* Category Pills */}
       <div className="flex flex-wrap gap-2">
         {categories.map((category) => {
           const label = category === "all" ? "All" : CategoryLabels[category];
@@ -165,7 +159,6 @@ export const BrowseCourses = () => {
         })}
       </div>
 
-      {/* Results */}
       <div className="flex items-center justify-between">
         <p className="text-sm text-muted-foreground">
           Showing {courses.pagination?.total} courses

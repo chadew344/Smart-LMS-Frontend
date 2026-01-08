@@ -20,6 +20,13 @@ const authService = {
     return response.data.data;
   },
 
+  upgradeToInstructor: async (): Promise<AuthResponse> => {
+    const response = await api.post<ApiResponse<AuthResponse>>(
+      "/auth/instructor"
+    );
+    return response.data.data;
+  },
+
   refreshToken: async (): Promise<AuthResponse> => {
     const response = await api.post<ApiResponse<AuthResponse>>("/auth/refresh");
     return response.data.data;

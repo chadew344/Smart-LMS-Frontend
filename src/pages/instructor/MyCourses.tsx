@@ -12,7 +12,6 @@ import {
   Star,
   Clock,
   BookOpen,
-  Filter,
   Search,
 } from "lucide-react";
 import { Button } from "../../components/ui/button";
@@ -110,7 +109,6 @@ export const MyCourses = () => {
 
   return (
     <div className="px-4 space-y-8 animate-fade-in">
-      {/* Header */}
       <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
         <div>
           <h1 className="text-2xl lg:text-3xl font-bold text-foreground">
@@ -304,9 +302,7 @@ export const MyCourses = () => {
                           Edit Course
                         </DropdownMenuItem>
                         <DropdownMenuItem
-                          onClick={() =>
-                            navigate(`/instructor-course/${course._id}`)
-                          }
+                          onClick={() => navigate(`/my-classses/${course._id}`)}
                         >
                           <Eye className="h-4 w-4 mr-2" />
                           Preview
@@ -393,9 +389,7 @@ export const MyCourses = () => {
                     <Button
                       variant="outline"
                       size="sm"
-                      onClick={() =>
-                        navigate(`/instructor-course/${course._id}`)
-                      }
+                      onClick={() => navigate(`${course._id}`)}
                     >
                       <Eye className="h-3.5 w-3.5 mr-1.5" />
                       Preview

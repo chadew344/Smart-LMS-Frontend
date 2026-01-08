@@ -36,7 +36,7 @@ import { getCourse } from "../store/slices/courseSlice";
 import { cn } from "../lib/utils";
 import { useAppDispatch, useAppSelector } from "../store/hook";
 import { toast } from "sonner";
-import type { Lesson, Module } from "../types";
+import { CategoryLabels, type Lesson, type Module } from "../types";
 import placeholderImage from "../assets/course-placeholder.svg";
 
 const levelColors = {
@@ -258,7 +258,7 @@ const CourseDetail = () => {
           <p className="text-muted-foreground">
             The course you're looking for doesn't exist or has been removed.
           </p>
-          <Button onClick={() => navigate("/browse")}>Browse Courses</Button>
+          <Button onClick={() => navigate("/courses")}>Browse Courses</Button>
         </div>
       </div>
     );
@@ -273,7 +273,7 @@ const CourseDetail = () => {
         )}
       >
         <Link
-          to="/browse"
+          to="/courses"
           className="inline-flex items-center gap-2 text-muted-foreground hover:text-foreground transition-colors"
         >
           <ArrowLeft className="h-4 w-4" />
@@ -288,7 +288,7 @@ const CourseDetail = () => {
                   variant="outline"
                   className="text-primary border-primary/30"
                 >
-                  {currentCourse.category}
+                  {CategoryLabels[currentCourse.category]}
                 </Badge>
                 <Badge
                   variant="outline"

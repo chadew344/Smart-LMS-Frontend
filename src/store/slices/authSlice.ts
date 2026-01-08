@@ -50,6 +50,18 @@ export const login = createAsyncThunk<
   }
 });
 
+export const upgradeToInstructor = createAsyncThunk<
+  AuthResponse,
+  void,
+  { rejectValue: string }
+>("auth/upgradeToInstructor", async (_, thunkAPI) => {
+  try {
+    return await authService.upgradeToInstructor();
+  } catch (error: any) {
+    return thunkAPI.rejectWithValue(error.message);
+  }
+});
+
 export const refreshAuth = createAsyncThunk<
   AuthResponse,
   void,
@@ -156,6 +168,28 @@ export const authSlice = createSlice({
       .addCase(login.rejected, (state, action) => {
         state.isLoading = false;
         state.error = action.payload ?? "Login failed";
+        state.user = null;
+        state.accessToken = null;
+        state.isAuthenticated = false;
+        state.message = "";
+      })
+
+      .addCase(upgradeToInstructor.pending, (state) => {
+        state.isLoading = true;
+        state.error = null;
+      })
+      .addCase(upgradeToInstructor.fulfilled, (state, action) => {
+        state.isLoading = false;
+        state.user = normalizeUser(action.payload.user);
+        state.activeRole = USER_ROLES.INSTRUCTOR;
+        state.isAuthenticated = true;
+        state.message =
+          "Your account has been successfully upgraded to instructor";
+      })
+      .addCase(upgradeToInstructor.rejected, (state, action) => {
+        state.isLoading = false;
+        state.error =
+          action.payload ?? "Unable to upgrade account to instructor";
         state.user = null;
         state.accessToken = null;
         state.isAuthenticated = false;

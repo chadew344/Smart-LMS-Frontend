@@ -17,16 +17,29 @@ import {
   mockStudentStats,
   mockRecentActivities,
 } from "../../data/mockData";
+import { useAppSelector } from "../../store/hook";
+import { toTitleCase } from "../../lib/string";
+
+export interface DashboardCourse {
+  id: string;
+  title: string;
+  thumbnail?: string;
+  progress?: number;
+  instructor?: string;
+  duration?: string;
+}
 
 const StudentDashboard = () => {
   const enrolledCourses = mockCourses.filter((c) => c.progress !== undefined);
   const upcomingQuizzes = mockQuizzes.filter((q) => q.status !== "completed");
 
+  const { user } = useAppSelector((state) => state.auth);
+
   return (
     <div className="space-y-8 animate-fade-in">
       <div>
         <h1 className="text-2xl lg:text-3xl font-bold text-foreground mb-2">
-          Welcome back, Alex! 👋
+          Welcome back {toTitleCase(user?.firstName || "")}! 👋
         </h1>
         <p className="text-muted-foreground">
           Continue your learning journey. You're doing great!
@@ -84,7 +97,6 @@ const StudentDashboard = () => {
             </div>
           </section>
 
-          {/* Weekly Progress */}
           <section className="bg-card rounded-xl p-6 shadow-card border border-border/50">
             <div className="flex items-center justify-between mb-6">
               <h2 className="text-lg font-semibold text-foreground">
@@ -121,7 +133,6 @@ const StudentDashboard = () => {
             </div>
           </section>
 
-          {/* Upcoming Quizzes */}
           <section>
             <div className="flex items-center justify-between mb-4">
               <h2 className="text-lg font-semibold text-foreground">
@@ -139,9 +150,7 @@ const StudentDashboard = () => {
           </section>
         </div>
 
-        {/* Right Column - Activity & Schedule */}
         <div className="space-y-6">
-          {/* Overall Progress */}
           <section className="bg-card rounded-xl p-6 shadow-card border border-border/50">
             <h2 className="text-lg font-semibold text-foreground mb-4">
               Overall Progress
@@ -180,7 +189,6 @@ const StudentDashboard = () => {
             </p>
           </section>
 
-          {/* Recent Activity */}
           <section className="bg-card rounded-xl p-6 shadow-card border border-border/50">
             <h2 className="text-lg font-semibold text-foreground mb-4">
               Recent Activity
@@ -203,7 +211,6 @@ const StudentDashboard = () => {
             </div>
           </section>
 
-          {/* Today's Schedule */}
           <section className="bg-card rounded-xl p-6 shadow-card border border-border/50">
             <div className="flex items-center gap-2 mb-4">
               <Calendar className="h-5 w-5 text-primary" />

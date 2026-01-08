@@ -44,7 +44,7 @@ import {
   COURSE_CATEGORIES,
   COURSE_LEVELS,
 } from "../types";
-import { useAppDispatch, useAppSelector } from "../store/hook";
+import { useAppDispatch } from "../store/hook";
 
 interface QuizQuestion {
   id: string;
@@ -76,7 +76,6 @@ const generateId = () => Math.random().toString(36).substr(2, 9);
 export const CreateCourse = () => {
   const navigate = useNavigate();
   const dispatch = useAppDispatch();
-  const { isLoading } = useAppSelector((state) => state.course);
 
   const [activeStep, setActiveStep] = useState(1);
 
@@ -171,7 +170,7 @@ export const CreateCourse = () => {
     );
   };
 
-  const removeLesson = (moduleId: string, lessonId: string) => {
+  const removeLesson = (_moduleId: string, lessonId: string) => {
     setModules(
       modules.map((m) => ({
         ...m,
@@ -181,7 +180,7 @@ export const CreateCourse = () => {
   };
 
   const updateLesson = (
-    moduleId: string,
+    _moduleId: string,
     lessonId: string,
     updates: Partial<LessonItem>
   ) => {
@@ -333,36 +332,6 @@ export const CreateCourse = () => {
     return match ? parseInt(match[1]) : 0;
   };
 
-  // const prepareCourseData = (): CreateCourseData => {
-  //   return {
-  //     title: courseTitle.trim(),
-  //     description: courseDescription.trim(),
-  //     category: category as CourseCategory,
-  //     level: level as CourseLevel,
-  //     price: price ? parseFloat(price) : 0,
-  //     thumbnail: thumbnailUrl || undefined,
-  //     modules: modules.map((module, moduleIndex) => ({
-  //       title: module.title.trim(),
-  //       description: undefined,
-  //       order: moduleIndex,
-  //       lessons: module.lessons.map((lesson, lessonIndex) => ({
-  //         title: lesson.title.trim(),
-  //         description: undefined,
-  //         type: lesson.type,
-  //         duration: parseDuration(lesson.duration),
-  //         order: lessonIndex,
-  //         video: lesson.video,
-  //         readingContent: lesson.content,
-  //         quizId: undefined,
-  //         resources: [],
-  //       })),
-  //     })),
-  //     requirements: [],
-  //     learningOutcomes: [],
-  //     enableSequentialLearning: false,
-  //   };
-  // };
-
   const prepareCourseData = (): CreateCourseData => {
     return {
       title: courseTitle.trim(),
@@ -394,56 +363,6 @@ export const CreateCourse = () => {
     };
   };
 
-  // const validateCourseData = (): boolean => {
-  //   if (!courseTitle.trim()) {
-  //     toast.error("Please enter a course title");
-  //     setActiveStep(1);
-  //     return false;
-  //   }
-
-  //   if (!courseDescription.trim()) {
-  //     toast.error("Please enter a course description");
-  //     setActiveStep(1);
-  //     return false;
-  //   }
-
-  //   if (!category) {
-  //     toast.error("Please select a category");
-  //     setActiveStep(1);
-  //     return false;
-  //   }
-
-  //   if (!level) {
-  //     toast.error("Please select a level");
-  //     setActiveStep(1);
-  //     return false;
-  //   }
-
-  //   if (modules.length === 0) {
-  //     toast.error("Please add at least one module");
-  //     setActiveStep(2);
-  //     return false;
-  //   }
-
-  //   const hasLessons = modules.some((m) => m.lessons.length > 0);
-  //   if (!hasLessons) {
-  //     toast.error("Please add at least one lesson");
-  //     setActiveStep(2);
-  //     return false;
-  //   }
-
-  //   const missingVideos = modules.some((module) =>
-  //     module.lessons.some((lesson) => lesson.type === "video" && !lesson.video)
-  //   );
-
-  //   if (missingVideos) {
-  //     toast.error("Please upload videos for all video lessons");
-  //     setActiveStep(2);
-  //     return false;
-  //   }
-
-  //   return true;
-  // };
   const validateCourseData = (): boolean => {
     // Basic info validation
     if (!courseTitle.trim()) {
@@ -470,35 +389,30 @@ export const CreateCourse = () => {
       return false;
     }
 
-    // Validate category is a valid enum value
     if (!Object.values(COURSE_CATEGORIES).includes(category as any)) {
       toast.error("Invalid category selected");
       setActiveStep(1);
       return false;
     }
 
-    // Validate level is a valid enum value
     if (!Object.values(COURSE_LEVELS).includes(level as any)) {
       toast.error("Invalid level selected");
       setActiveStep(1);
       return false;
     }
 
-    // Price validation
     if (price && (isNaN(parseFloat(price)) || parseFloat(price) < 0)) {
       toast.error("Please enter a valid price");
       setActiveStep(1);
       return false;
     }
 
-    // Thumbnail validation (if required by backend)
     if (!thumbnailUrl) {
       toast.error("Please upload a course thumbnail");
       setActiveStep(1);
       return false;
     }
 
-    // Module validation
     if (modules.length === 0) {
       toast.error("Please add at least one module");
       setActiveStep(2);
@@ -712,18 +626,6 @@ export const CreateCourse = () => {
               <div className="grid sm:grid-cols-2 gap-4">
                 <div>
                   <Label className="text-base font-semibold">Category</Label>
-                  {/* <Select value={category} onValueChange={setCategory}>
-                    <SelectTrigger className="h-12 mt-2">
-                      <SelectValue placeholder="Select category" />
-                    </SelectTrigger>
-                    <SelectContent>
-                      <SelectItem value="programming">Programming</SelectItem>
-                      <SelectItem value="web_dev">Web Development</SelectItem>
-                      <SelectItem value="data_science">Data Science</SelectItem>
-                      <SelectItem value="ai_ml">AI/ML</SelectItem>
-                      <SelectItem value="ui_ux">Design</SelectItem>
-                    </SelectContent>
-                  </Select> */}
                   <Select value={category} onValueChange={setCategory}>
                     <SelectTrigger className="h-12 mt-2">
                       <SelectValue placeholder="Select category" />
@@ -866,7 +768,7 @@ export const CreateCourse = () => {
           </div>
 
           <div className="space-y-4">
-            {modules.map((module, moduleIndex) => (
+            {modules.map((module, _moduleIndex) => (
               <div
                 key={module.id}
                 className="bg-card border border-border rounded-xl overflow-hidden"

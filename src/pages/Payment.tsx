@@ -1,5 +1,5 @@
-import React, { useState, useEffect } from "react";
-import { useParams, useNavigate, useSearchParams } from "react-router-dom";
+import { useState, useEffect } from "react";
+import { useParams, useNavigate } from "react-router-dom";
 import {
   CreditCard,
   Shield,
@@ -25,7 +25,7 @@ type PaymentMethod = "card" | "paypal" | "applepay";
 const Payment = () => {
   const { courseId } = useParams();
   const navigate = useNavigate();
-  const [searchParams] = useSearchParams();
+  // const [searchParams] = useSearchParams();
   const dispatch = useDispatch<AppDispatch>();
 
   const { isAuthenticated } = useSelector((state: RootState) => state.auth);

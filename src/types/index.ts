@@ -5,6 +5,8 @@ export * from "./themeTypes";
 export * from "./courseTypes";
 export * from "./enrollmentTypes";
 
+export * from "./aiChatTypes";
+
 export type ApiResponse<T> = {
   success: boolean;
   message: string;
