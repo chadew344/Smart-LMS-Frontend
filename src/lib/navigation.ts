@@ -10,6 +10,7 @@ import {
   Calendar,
   FolderOpen,
   PlusCircle,
+  FileDown,
 } from "lucide-react";
 import type { LucideIcon } from "lucide-react";
 import type { UserRole } from "../types";
@@ -81,6 +82,12 @@ export const navigationConfig: Record<UserRole, NavSection[]> = {
           path: dashboardPath("calendar"),
           roles: ["student"],
         },
+        {
+          label: "Reports",
+          icon: FileDown,
+          path: "reports",
+          roles: ["student"],
+        },
       ],
     },
     {
@@ -150,6 +157,12 @@ export const navigationConfig: Record<UserRole, NavSection[]> = {
           path: dashboardPath("calendar"),
           roles: ["instructor"],
         },
+        {
+          label: "Reports",
+          icon: FileDown,
+          path: "reports",
+          roles: ["instructor"],
+        },
       ],
     },
     {
@@ -201,6 +214,12 @@ export const navigationConfig: Record<UserRole, NavSection[]> = {
           icon: BarChart3,
           path: dashboardPath("admin/analytics"),
           roles: ["admin"],
+        },
+        {
+          label: "Reports",
+          icon: FileDown,
+          path: "reports",
+          roles: ["instructor"],
         },
       ],
     },
