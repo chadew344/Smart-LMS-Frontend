@@ -5,7 +5,11 @@ import { Button } from "../ui/button";
 import { ProgressBar } from "./ProgressBar";
 import { UserAvatar } from "./UserAvatar";
 import { cn } from "../../lib/utils";
-import type { Course, EnrollmentStatus } from "../../types";
+import {
+  CategoryLabels,
+  type Course,
+  type EnrollmentStatus,
+} from "../../types";
 import placeholderImage from "../../assets/course-placeholder.svg";
 import { useAppSelector } from "../../store/hook";
 
@@ -150,7 +154,7 @@ export const CourseCard = ({
           <div className="flex items-start justify-between gap-4">
             <div className="flex-1 min-w-0">
               <p className="text-xs font-medium text-primary mb-1">
-                {course.category}
+                {CategoryLabels[course.category]}
               </p>
               <h3 className="font-semibold text-foreground text-lg mb-2 line-clamp-1 group-hover:text-primary transition-colors">
                 {course.title}
@@ -234,7 +238,7 @@ export const CourseCard = ({
 
         <div className="p-4">
           <p className="text-xs font-medium text-primary mb-1">
-            {course.category}
+            {CategoryLabels[course.category]}
           </p>
           <h3 className="font-semibold text-foreground text-sm mb-2 line-clamp-2 group-hover:text-primary transition-colors">
             {course.title}
@@ -318,7 +322,7 @@ export const CourseCard = ({
         </div>
 
         <p className="text-xs font-medium text-primary mb-1">
-          {course.category}
+          {CategoryLabels[course.category]}
         </p>
         <h3 className="font-semibold text-foreground text-lg mb-2 line-clamp-2 group-hover:text-primary transition-colors">
           {course.title}
