@@ -1,7 +1,12 @@
 import axios, { AxiosError } from "axios";
 import type { RootState } from "../store/store";
 
-const PUBLIC_ENDPOINTS = ["/auth/login", "/auth/register", "/auth/refresh"];
+const PUBLIC_ENDPOINTS = [
+  "/auth/login",
+  "/auth/register",
+  "/auth/refresh",
+  "/auth/google",
+];
 
 const api = axios.create({
   baseURL: import.meta.env.VITE_API_BASE_URL,

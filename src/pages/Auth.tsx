@@ -28,7 +28,7 @@ import {
 } from "../components/ui/tabs";
 import { ThemeToggle } from "../components/common/ThemeToggle";
 import { useAppDispatch, useAppSelector } from "../store/hook";
-import { login, register } from "../store/slices/authSlice";
+import { login, loginWithGoogle, register } from "../store/slices/authSlice";
 import {
   loginSchema,
   registerSchema,
@@ -36,6 +36,8 @@ import {
   type RegisterInput,
 } from "../schema/auth.schema";
 import { cn } from "../lib/utils";
+import { useGoogleLogin } from "@react-oauth/google";
+import { toast } from "sonner";
 
 const roleConfig = {
   student: {
@@ -151,9 +153,25 @@ export const Login = () => {
     );
   };
 
-  const handleGoogleLogin = () => {
-    console.log("Google login with role:");
-  };
+  const handleGoogleLogin = useGoogleLogin({
+    onSuccess: async (response) => {
+      try {
+        const resultAction = await dispatch(
+          loginWithGoogle(response.code)
+        ).unwrap();
+
+        console.log("Login Success:", resultAction);
+        navigate("/dashboard");
+      } catch (error) {
+        toast.error("Google Login Failed");
+        console.error("Failed to login with Google:", error);
+      }
+    },
+    onError: () => {
+      toast.error("Google Login Failed to Initialize");
+    },
+    flow: "auth-code",
+  });
 
   return (
     <div className="min-h-screen bg-background flex">

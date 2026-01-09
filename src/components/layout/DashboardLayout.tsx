@@ -181,21 +181,8 @@ const DashboardLayout = () => {
                 name={`${user.firstName} ${user.lastName}`}
                 email={user.email}
                 role={activeRole}
-                // avatar={}
+                avatar={user.avatar}
               />
-              {/* <div className="flex items-center gap-3 pl-2 ml-2 border-l border-border">
-                <UserAvatar name={user.firstName} image={undefined} />
-                <div className="hidden md:block">
-                  <p className="text-sm font-medium text-foreground">
-                    {user.firstName}
-                  </p>
-                  <p className="text-xs text-muted-foreground capitalize">
-                    {Array.isArray(user.roles)
-                      ? user.roles.join(", ")
-                      : user.roles}
-                  </p>
-                </div>
-              </div> */}
             </div>
           </div>
         </header>

@@ -42,9 +42,21 @@ export const login = createAsyncThunk<
   AuthResponse,
   LoginData,
   { rejectValue: string }
->("auth/login", async (userData: LoginData, thunkAPI) => {
+>("auth/login", async (userData, thunkAPI) => {
   try {
     return await authService.login(userData);
+  } catch (error: any) {
+    return thunkAPI.rejectWithValue(getErrorMessage(error, "Login failed"));
+  }
+});
+
+export const loginWithGoogle = createAsyncThunk<
+  AuthResponse,
+  string,
+  { rejectValue: string }
+>("auth/google", async (code, thunkAPI) => {
+  try {
+    return await authService.loginWithGoogle(code);
   } catch (error: any) {
     return thunkAPI.rejectWithValue(getErrorMessage(error, "Login failed"));
   }
@@ -166,6 +178,26 @@ export const authSlice = createSlice({
         state.message = "Login successful";
       })
       .addCase(login.rejected, (state, action) => {
+        state.isLoading = false;
+        state.error = action.payload ?? "Login failed";
+        state.user = null;
+        state.accessToken = null;
+        state.isAuthenticated = false;
+        state.message = "";
+      })
+
+      .addCase(loginWithGoogle.pending, (state) => {
+        state.isLoading = true;
+        state.error = null;
+      })
+      .addCase(loginWithGoogle.fulfilled, (state, action) => {
+        state.isLoading = false;
+        state.user = normalizeUser(action.payload.user);
+        state.accessToken = action.payload.accessToken;
+        state.isAuthenticated = true;
+        state.message = "Login successful";
+      })
+      .addCase(loginWithGoogle.rejected, (state, action) => {
         state.isLoading = false;
         state.error = action.payload ?? "Login failed";
         state.user = null;

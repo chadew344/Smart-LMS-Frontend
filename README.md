@@ -181,6 +181,7 @@ Create a `.env` file in the root directory:
 ```env
 # API Configuration
 VITE_API_BASE_URL=http://localhost:5000/api/v1
+VITE_GOOGLE_CLIENT_ID=your-google-client-id-paste-here
 ```
 
 **For Production (Vercel/Netlify):**
@@ -294,6 +295,7 @@ frontend/
 │   ├── App.tsx
 │   ├── index.css
 │   └── main.tsx
+├── .env.example
 ├── package-lock.json
 ├── package.json
 ├── README.md

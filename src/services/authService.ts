@@ -20,6 +20,13 @@ const authService = {
     return response.data.data;
   },
 
+  loginWithGoogle: async (code: string): Promise<AuthResponse> => {
+    const response = await api.post<ApiResponse<AuthResponse>>("/auth/google", {
+      code,
+    });
+    return response.data.data;
+  },
+
   upgradeToInstructor: async (): Promise<AuthResponse> => {
     const response = await api.post<ApiResponse<AuthResponse>>(
       "/auth/instructor"
