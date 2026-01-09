@@ -9,8 +9,8 @@
 
 ## 🚀 Live Demo
 
-**Frontend Application:** [Will be updated shortly]  
-**Backend API:** [Will be updated shortly]
+- **Frontend Application:** [smart-lms-frontend.vercel.app](https://smart-lms-frontend.vercel.app)
+- **Backend API:** [smart-lms-backend.vercel.app](https://smart-lms-backend.vercel.app)
 
 ## 📋 Table of Contents
 
