@@ -93,15 +93,35 @@
 
 ## 📸 Screenshots
 
-### Desktop View
+_(Only a few screenshots are shown here. More screenshots are available in the /screenshots folder.)_
 
-![Desktop Dashboard](./screenshots/desktop-dashboard.png)
-_Main dashboard view showing key metrics and data_
+### Landing Page
+
+<img height="400px" src="/screenshots/landing-dark.png" width="700px"/>
+
+<img height="400px" src="/screenshots/landing-light.png" width="700px"/>
+
+### Auth Page
+
+<img height="400px" src="/screenshots/login-light.png" width="700px"/>
+
+<img height="400px" src="/screenshots/register-dark.png" width="700px"/>
+
+### Course Browse Page
+
+<img height="400px" src="/screenshots/browse-courses-dark.png" width="700px"/>
+
+### Dashboard Page
+
+<img height="400px" src="/screenshots/dashboard-dark.png" width="700px"/>
 
 ### Mobile View
 
-![Mobile View](./screenshots/mobile-view.png)
-_Responsive mobile interface_
+<img height="400px" src="/screenshots/login-mobile-dark.png" width="700px"/>
+
+<img height="400px" src="/screenshots/dashboard-mobile-dark.png" width="700px"/>
+
+> ℹ️ Note: For more screenshots and views, check the [screenshots folder](./screenshots/).
 
 ### Authentication
 
@@ -200,6 +220,7 @@ frontend/
 ├── public
 │   ├── smart-lms.svg
 │   └── vite.svg
+├── screenshots
 ├── src
 │   ├── assets
 │   │   ├── course-placeholder.svg
@@ -216,6 +237,7 @@ frontend/
 │   │   │   ├── ThemeToggle.tsx
 │   │   │   └── UserAvatar.tsx
 │   │   ├── features
+│   │   │   ├── AiChat.tsx
 │   │   │   ├── AppToaster.tsx
 │   │   │   ├── LessonList.tsx
 │   │   │   └── VideoPlayer.tsx
@@ -248,24 +270,26 @@ frontend/
 │   │   ├── string.ts
 │   │   └── utils.ts
 │   ├── pages
-│   │   ├── Auth.tsx
-│   │   ├── BrowseCourse.tsx
-│   │   ├── courseDetails.tsx
-│   │   ├── CreateCourse.tsx
 │   │   ├── dashboard
 │   │   │   ├── AdminDashboard.tsx
 │   │   │   ├── InstructorDashboard.tsx
 │   │   │   └── StudentDashboard.tsx
-│   │   ├── DashboardIndex.tsx
-│   │   ├── ForgotPassword.tsx
 │   │   ├── instructor
 │   │   │   └── MyCourses.tsx
+│   │   ├── student
+│   │       └── MyCourse.tsx
+│   │   ├── Auth.tsx
+│   │   ├── BrowseCourse.tsx
+│   │   ├── courseDetails.tsx
+│   │   ├── CreateCourse.tsx
+│   │   ├── DashboardIndex.tsx
+│   │   ├── ForgotPassword.tsx
 │   │   ├── Landing.tsx
 │   │   ├── NotFound.tsx
 │   │   ├── Payment.tsx
-│   │   ├── ResetPassword.tsx
-│   │   └── student
-│   │       └── MyCourse.tsx
+│   │   ├── PaymentSuccess.tsx
+│   │   ├── Report.tsx
+│   │   └── ResetPassword.tsx
 │   ├── routes
 │   │   └── index.tsx
 │   ├── schema
@@ -275,6 +299,7 @@ frontend/
 │   │   ├── authService.ts
 │   │   ├── courseService.ts
 │   │   ├── enrollmentService.ts
+│   │   ├── paymentService.ts
 │   │   └── uploadService.ts
 │   ├── store
 │   │   ├── hook.ts
