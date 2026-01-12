@@ -521,7 +521,7 @@ export const CreateCourse = () => {
 
       toast.success("Course published successfully! 🎉");
 
-      navigate(`/instructor/courses/${createdCourse._id}`);
+      navigate(`../my-classes/${createdCourse._id}`);
     } catch (error: any) {
       toast.error(error || "Failed to publish course");
     } finally {

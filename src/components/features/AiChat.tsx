@@ -92,7 +92,9 @@ const FloatingChatButton = () => {
               <Sparkles className="h-5 w-5 text-primary-foreground" />
             </div>
             <div>
-              <h3 className="font-semibold text-foreground">AI Assistant</h3>
+              <h3 className="font-semibold text-foreground">
+                Edumate Assistant
+              </h3>
               <p className="text-xs text-muted-foreground">
                 {isTyping ? "Typing..." : "Always here to help"}
               </p>

@@ -46,7 +46,7 @@ export const InstructorCourseDetail = () => {
         <Button
           variant="outline"
           className="mt-4"
-          onClick={() => navigate("/my-courses")}
+          onClick={() => navigate("../my-classes")}
         >
           Back to My Courses
         </Button>

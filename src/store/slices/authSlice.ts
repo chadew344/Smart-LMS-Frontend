@@ -175,6 +175,10 @@ export const authSlice = createSlice({
         state.user = normalizeUser(action.payload.user);
         state.accessToken = action.payload.accessToken;
         state.isAuthenticated = true;
+        state.activeRole = action.payload.user.roles.includes(state.activeRole)
+          ? state.activeRole
+          : USER_ROLES.STUDENT;
+
         state.message = "Login successful";
       })
       .addCase(login.rejected, (state, action) => {
