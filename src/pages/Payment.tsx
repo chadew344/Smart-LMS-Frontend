@@ -14,10 +14,10 @@ import { Label } from "../components/ui/label";
 import { Separator } from "../components/ui/separator";
 import type { AppDispatch, RootState } from "../store/store";
 import { getCourse } from "../store/slices/courseSlice";
-import { createPaymentSession } from "../store/slices/enrollmentSlice";
-// import {
-//   enrollInCourse,
-// } from "../store/slices/enrollmentSlice";
+import {
+  createPaymentSession,
+  enrollInCourse,
+} from "../store/slices/enrollmentSlice";
 import { cn } from "../lib/utils";
 import { toast } from "sonner";
 import { useDispatch, useSelector } from "react-redux";
@@ -146,44 +146,42 @@ const Payment = () => {
     }
   };
 
-  // const handlePayment = async () => {
-  //   if (paymentMethod === "card") {
-  //     if (!cardName || !cardNumber || !expiryDate || !cvv) {
-  //       toast.error("Please fill in all card details");
-  //       return;
-  //     }
-  //     if (cardNumber.replace(/\s/g, "").length !== 16) {
-  //       toast.error("Invalid card number");
-  //       return;
-  //     }
-  //     if (cvv.length < 3) {
-  //       toast.error("Invalid CVV");
-  //       return;
-  //     }
-  //   }
-
-  //   setIsProcessing(true);
-
-  //   try {
-  //     await new Promise((resolve) => setTimeout(resolve, 2000));
-
-  //     await dispatch(enrollInCourse(course._id)).unwrap();
-
-  //     toast.success("Payment successful! Welcome to the course");
-
-  //     navigate(`/courses/${course._id}`);
-  //   } catch (error: any) {
-  //     toast.error(error || "Payment failed. Please try again.");
-  //     setIsProcessing(false);
-  //   }
-  // };
-
-  const handlePayment = async () => {
+  const cardPayment = async () => {
     if (paymentMethod === "card") {
       if (!cardName || !cardNumber || !expiryDate || !cvv) {
         toast.error("Please fill in all card details");
         return;
       }
+      if (cardNumber.replace(/\s/g, "").length !== 16) {
+        toast.error("Invalid card number");
+        return;
+      }
+      if (cvv.length < 3) {
+        toast.error("Invalid CVV");
+        return;
+      }
+    }
+
+    setIsProcessing(true);
+
+    try {
+      await new Promise((resolve) => setTimeout(resolve, 2000));
+
+      await dispatch(enrollInCourse(course._id)).unwrap();
+
+      toast.success("Payment successful! Welcome to the course");
+
+      navigate(`/courses/${course._id}`);
+    } catch (error: any) {
+      toast.error(error || "Payment failed. Please try again.");
+      setIsProcessing(false);
+    }
+  };
+
+  const handlePayment = async () => {
+    if (paymentMethod === "card") {
+      await cardPayment();
+      return;
     }
 
     setIsProcessing(true);

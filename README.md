@@ -117,9 +117,9 @@ _(Only a few screenshots are shown here. More screenshots are available in the /
 
 ### Mobile View
 
-<img height="400px" src="/screenshots/login-mobile-dark.png" width="700px"/>
+<img height="375px" src="/screenshots/login-mobile-dark.png" width="245px"/>
 
-<img height="400px" src="/screenshots/dashboard-mobile-dark.png" width="700px"/>
+<img height="374px" src="/screenshots/dashboard-mobile-dark.png" width="245px"/>
 
 > ℹ️ Note: For more screenshots and views, check the [screenshots folder](./screenshots/).
 
