@@ -22,6 +22,8 @@ const DashboardIndex = lazy(() => import("../pages/DashboardIndex"));
 const CourseDetail = lazy(() => import("../pages/courseDetails"));
 const CreateCourse = lazy(() => import("../pages/CreateCourse"));
 const Payment = lazy(() => import("../pages/Payment"));
+const PaymentSuccess = lazy(() => import("../pages/PaymentSuccess"));
+
 const MyCourses = lazy(() => import("../pages/instructor/MyCourses"));
 const Auth = lazy(() => import("../pages/Auth"));
 const ForgotPassword = lazy(() => import("../pages/ForgotPassword"));
@@ -101,6 +103,7 @@ export default function Router() {
           <Route path="/forgot-password" element={<ForgotPassword />} />
           <Route path="/reset-password" element={<ResetPassword />} />
           <Route path="payment/:courseId" element={<Payment />} />
+          <Route path="/payment/success" element={<PaymentSuccess />} />
           <Route path="*" element={<NotFound />} />
         </Routes>
         <FloatingChatButton />

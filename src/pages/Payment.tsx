@@ -14,13 +14,16 @@ import { Label } from "../components/ui/label";
 import { Separator } from "../components/ui/separator";
 import type { AppDispatch, RootState } from "../store/store";
 import { getCourse } from "../store/slices/courseSlice";
-import { enrollInCourse } from "../store/slices/enrollmentSlice";
+import { createPaymentSession } from "../store/slices/enrollmentSlice";
+// import {
+//   enrollInCourse,
+// } from "../store/slices/enrollmentSlice";
 import { cn } from "../lib/utils";
 import { toast } from "sonner";
 import { useDispatch, useSelector } from "react-redux";
 import placeholderImage from "../assets/course-placeholder.svg";
 
-type PaymentMethod = "card" | "paypal" | "applepay";
+type PaymentMethod = "card" | "paypal" | "stripe";
 
 const Payment = () => {
   const { courseId } = useParams();
@@ -143,18 +146,42 @@ const Payment = () => {
     }
   };
 
+  // const handlePayment = async () => {
+  //   if (paymentMethod === "card") {
+  //     if (!cardName || !cardNumber || !expiryDate || !cvv) {
+  //       toast.error("Please fill in all card details");
+  //       return;
+  //     }
+  //     if (cardNumber.replace(/\s/g, "").length !== 16) {
+  //       toast.error("Invalid card number");
+  //       return;
+  //     }
+  //     if (cvv.length < 3) {
+  //       toast.error("Invalid CVV");
+  //       return;
+  //     }
+  //   }
+
+  //   setIsProcessing(true);
+
+  //   try {
+  //     await new Promise((resolve) => setTimeout(resolve, 2000));
+
+  //     await dispatch(enrollInCourse(course._id)).unwrap();
+
+  //     toast.success("Payment successful! Welcome to the course");
+
+  //     navigate(`/courses/${course._id}`);
+  //   } catch (error: any) {
+  //     toast.error(error || "Payment failed. Please try again.");
+  //     setIsProcessing(false);
+  //   }
+  // };
+
   const handlePayment = async () => {
     if (paymentMethod === "card") {
       if (!cardName || !cardNumber || !expiryDate || !cvv) {
         toast.error("Please fill in all card details");
-        return;
-      }
-      if (cardNumber.replace(/\s/g, "").length !== 16) {
-        toast.error("Invalid card number");
-        return;
-      }
-      if (cvv.length < 3) {
-        toast.error("Invalid CVV");
         return;
       }
     }
@@ -162,13 +189,9 @@ const Payment = () => {
     setIsProcessing(true);
 
     try {
-      await new Promise((resolve) => setTimeout(resolve, 2000));
+      const { url } = await dispatch(createPaymentSession(course._id)).unwrap();
 
-      await dispatch(enrollInCourse(course._id)).unwrap();
-
-      toast.success("Payment successful! Welcome to the course");
-
-      navigate(`/courses/${course._id}`);
+      window.location.href = url;
     } catch (error: any) {
       toast.error(error || "Payment failed. Please try again.");
       setIsProcessing(false);
@@ -214,7 +237,7 @@ const Payment = () => {
                 {[
                   { id: "card", label: "Card", icon: CreditCard },
                   { id: "paypal", label: "PayPal", icon: null },
-                  { id: "applepay", label: "Apple Pay", icon: null },
+                  { id: "stripe", label: "Stripe Pay", icon: null },
                 ].map((method) => (
                   <button
                     key={method.id}
@@ -240,7 +263,7 @@ const Payment = () => {
                           Pay<span className="text-[#009cde]">Pal</span>
                         </span>
                       )}
-                      {method.id === "applepay" && (
+                      {method.id === "stripe" && (
                         <span className="text-xl font-medium text-foreground">
                           {" "}
                           Pay
@@ -348,10 +371,10 @@ const Payment = () => {
                 </div>
               )}
 
-              {paymentMethod === "applepay" && (
+              {paymentMethod === "stripe" && (
                 <div className="text-center py-8 animate-fade-in">
                   <p className="text-muted-foreground mb-4">
-                    Click below to pay with Apple Pay
+                    Click below to pay with Stripe
                   </p>
                 </div>
               )}

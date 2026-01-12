@@ -8,6 +8,7 @@ import type {
   CourseProgressResponse,
 } from "../../types";
 import { getErrorMessage } from "../../lib/error";
+import paymentService from "../../services/paymentService";
 
 const initialState: EnrollmentState = {
   enrollments: [],
@@ -27,6 +28,34 @@ export const enrollInCourse = createAsyncThunk<
 >("enrollment/enroll", async (courseId, thunkAPI) => {
   try {
     return await enrollmentService.enrollInCourse(courseId);
+  } catch (error: any) {
+    return thunkAPI.rejectWithValue(
+      getErrorMessage(error, "Failed to enroll in course")
+    );
+  }
+});
+
+export const createPaymentSession = createAsyncThunk<
+  { sessionId: string; url: string },
+  string,
+  { rejectValue: string }
+>("enrollment/createPayment", async (courseId, thunkAPI) => {
+  try {
+    return await paymentService.createPaymentSession(courseId);
+  } catch (error: any) {
+    return thunkAPI.rejectWithValue(
+      getErrorMessage(error, "Failed to enroll in course")
+    );
+  }
+});
+
+export const verifyPayment = createAsyncThunk<
+  Enrollment,
+  string,
+  { rejectValue: string }
+>("enrollment/verifyPayment", async (sessionId, thunkAPI) => {
+  try {
+    return await paymentService.verifyPayment(sessionId);
   } catch (error: any) {
     return thunkAPI.rejectWithValue(
       getErrorMessage(error, "Failed to enroll in course")
