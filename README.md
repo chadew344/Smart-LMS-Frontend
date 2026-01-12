@@ -123,11 +123,6 @@ _(Only a few screenshots are shown here. More screenshots are available in the /
 
 > ℹ️ Note: For more screenshots and views, check the [screenshots folder](./screenshots/).
 
-### Authentication
-
-![Login Screen](./screenshots/login.png)
-_Login page with validation_
-
 <a id="getting-started"></a>
 
 ## 🚦 Getting Started
